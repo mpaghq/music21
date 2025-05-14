@@ -5723,7 +5723,10 @@ class MeasureParser(SoundTagMixin, XMLParserBase):
         mxOctaveChange = mxTranspose.find('octave-change')
         if mxOctaveChange is not None:
             octaveChange = int(mxOctaveChange.text) * 12
-            diatonicStep += 7 * int(mxOctaveChange.text)
+            if diatonicStep is not None:
+                diatonicStep += 7 * int(mxOctaveChange.text)
+            else:
+                diatonicStep = 7 * int(mxOctaveChange.text)
         # TODO: presently not dealing with <double>
 
         # doubled one octave down from what is currently written
